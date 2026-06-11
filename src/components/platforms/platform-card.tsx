@@ -37,7 +37,7 @@ export function PlatformCard({ platform, index }: PlatformCardProps) {
           <div className="flex items-center gap-3">
             <span
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white"
-              style={{ backgroundColor: primarySegment?.color ?? "#6366f1" }}
+              style={{ backgroundColor: primarySegment?.color ?? "#f97316" }}
             >
               <SegmentIcon segmentId={platform.segments[0]} className="h-5 w-5" />
             </span>
