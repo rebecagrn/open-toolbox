@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Open Projects — Platforms & Tools Directory",
+  title: "OpenToolbox — Platforms & Tools Directory",
   description:
-    "Discover platforms and tools across every creative segment. Filter by design, programming, AI, video, and more — open source, free, freemium, or paid.",
+    "OpenToolbox — discover platforms and tools across every creative segment. Filter by design, programming, AI, video, and more.",
   keywords: [
     "tools",
     "platforms",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "directory",
   ],
   openGraph: {
-    title: "Open Projects — Platforms & Tools Directory",
+    title: "OpenToolbox — Platforms & Tools Directory",
     description:
       "Browse and filter platforms by segment and pricing across all creative categories.",
     type: "website",

@@ -1,4 +1,4 @@
-# Fontes de dados — Arquitetura do diretório
+# Fontes de dados — Arquitetura do OpenToolbox
 
 Este documento descreve as APIs e fontes usadas (ou planejadas) para montar o catálogo de ferramentas de IA.
 

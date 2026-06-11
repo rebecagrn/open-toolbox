@@ -1,4 +1,4 @@
-# Contributing to Open Projects
+# Contributing to OpenToolbox
 
 Thank you for considering a contribution! This project is community-driven — every tool added, description fixed, or UI improvement helps others discover the right platforms faster.
 
@@ -38,8 +38,8 @@ You don't need to write code to help:
 2. **Clone** your fork locally:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/open-projects-ai.git
-   cd open-projects-ai
+   git clone https://github.com/open-toolbox/open-toolbox.git
+   cd open-toolbox
    ```
 
 3. **Install** dependencies:
@@ -211,6 +211,6 @@ docs/contributing-guide
 
 ## Questions?
 
-Open a [GitHub Issue](https://github.com/YOUR_USERNAME/open-projects-ai/issues) for bugs, feature requests, or questions. For quick data additions, a PR is often faster than an issue.
+Open a [GitHub Issue](https://github.com/open-toolbox/open-toolbox/issues) for bugs, feature requests, or questions. For quick data additions, a PR is often faster than an issue.
 
 Thank you for helping build the open source tools directory!

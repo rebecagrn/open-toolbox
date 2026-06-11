@@ -1,4 +1,4 @@
-# Open Projects
+# OpenToolbox
 
 A community-driven directory for discovering **platforms, tools, and sites** across creative segments — plus a dedicated **AI tools catalog** with live API aggregation.
 
@@ -27,10 +27,11 @@ A community-driven directory for discovering **platforms, tools, and sites** acr
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/open-projects-ai.git
-cd open-projects-ai
+git clone https://github.com/open-toolbox/open-toolbox.git
+cd open-toolbox
 npm install
 cp .env.example .env.local
+# Set NEXT_PUBLIC_GITHUB_REPO_URL to your fork if different
 npm run dev
 ```
 
@@ -41,6 +42,7 @@ npm run dev
 | `GITHUB_TOKEN` | No | GitHub Search rate limit boost |
 | `PRODUCTHUNT_TOKEN` | No | Product Hunt GraphQL API |
 | `SYNC_BASE_URL` | No | Sync script base URL |
+| `NEXT_PUBLIC_GITHUB_REPO_URL` | No | GitHub repo link in header/footer |
 
 ## Data architecture
 

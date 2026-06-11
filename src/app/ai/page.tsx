@@ -5,7 +5,7 @@ import { formatUtcDateTime } from "@/lib/utils"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Open Source AI Tools — Open Projects",
+  title: "Open Source AI Tools — OpenToolbox",
   description:
     "Curated open source AI frameworks plus live listings from Hugging Face and GitHub.",
 }

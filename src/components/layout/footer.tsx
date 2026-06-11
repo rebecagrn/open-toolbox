@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
 export function Footer() {
   return (
@@ -7,12 +8,12 @@ export function Footer() {
         <p className="flex items-center gap-1.5 text-sm text-text-footer-muted">
           Built with
           <Heart className="h-3.5 w-3.5 text-brand-primary" aria-hidden="true" />
-          as an open source project
+          by the {siteConfig.name} community
         </p>
         <p className="text-sm text-text-footer-muted">
           Contribute on{" "}
           <a
-            href="https://github.com"
+            href={siteConfig.githubRepoUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-pointer text-text-footer underline-offset-4 transition-colors hover:text-brand-primary hover:underline"

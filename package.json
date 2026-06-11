@@ -1,7 +1,12 @@
 {
-  "name": "open-projects-ai",
+  "name": "open-toolbox",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-toolbox/open-toolbox.git"
+  },
+  "homepage": "https://github.com/open-toolbox/open-toolbox#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
