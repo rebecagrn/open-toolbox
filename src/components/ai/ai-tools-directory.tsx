@@ -122,7 +122,7 @@ function CategoryChip({ label, isActive, onClick }: CategoryChipProps) {
       onClick={onClick}
       onKeyDown={handleKeyDown}
       className={cn(
-        "rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors",
+        "cursor-pointer rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors",
         isActive
           ? "bg-brand-primary text-white"
           : "bg-bg-secondary text-text-muted hover:text-text-primary"

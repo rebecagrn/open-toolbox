@@ -55,7 +55,7 @@ export function AiSourceFilter({ tools, activeSource, onSourceChange }: AiSource
             onClick={() => onSourceChange(option.id)}
             onKeyDown={(e) => handleKeyDown(e, option.id)}
             className={cn(
-              "relative flex shrink-0 items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors",
+              "relative flex shrink-0 cursor-pointer items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors",
               isActive
                 ? "text-white"
                 : "bg-bg-elevated text-text-secondary ring-1 ring-border hover:text-text-primary hover:ring-border-hover"

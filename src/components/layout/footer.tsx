@@ -15,7 +15,7 @@ export function Footer() {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-text-footer underline-offset-4 transition-colors hover:text-brand-primary hover:underline"
+            className="cursor-pointer text-text-footer underline-offset-4 transition-colors hover:text-brand-primary hover:underline"
           >
             GitHub
           </a>

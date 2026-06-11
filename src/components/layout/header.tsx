@@ -7,7 +7,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
+          className="flex cursor-pointer items-center gap-2.5 transition-opacity hover:opacity-80"
           aria-label="Open Projects — home"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-primary to-brand-secondary text-white shadow-lg shadow-brand-primary/20">
@@ -24,7 +24,7 @@ export function Header() {
         <nav className="flex items-center gap-3" aria-label="Site navigation">
           <Link
             href="/browse"
-            className="hidden h-9 items-center rounded-lg px-3 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary sm:inline-flex"
+            className="hidden h-9 cursor-pointer items-center rounded-lg px-3 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary sm:inline-flex"
           >
             All segments
           </Link>
@@ -32,7 +32,7 @@ export function Header() {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-9 items-center gap-2 rounded-lg border border-border bg-bg-elevated px-3 text-sm font-medium text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary"
+            className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg border border-border bg-bg-elevated px-3 text-sm font-medium text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary"
             aria-label="View on GitHub"
           >
             <ExternalLink className="h-4 w-4" aria-hidden="true" />

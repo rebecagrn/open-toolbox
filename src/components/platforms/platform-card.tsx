@@ -28,7 +28,7 @@ export function PlatformCard({ platform, index }: PlatformCardProps) {
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "gradient-border flex h-full flex-col rounded-2xl bg-bg-elevated p-5 shadow-sm transition-all duration-300",
+          "gradient-border flex h-full cursor-pointer flex-col rounded-2xl bg-bg-elevated p-5 shadow-sm transition-all duration-300",
           "hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-primary/5"
         )}
         aria-label={`Visit ${platform.name} — opens in new tab`}
