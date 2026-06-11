@@ -1,11 +1,14 @@
-import { Hero } from "@/components/platforms/hero"
-import { PlatformDirectory } from "@/components/platforms/platform-directory"
+import { AiHero } from "@/components/ai/ai-hero"
+import { AiToolsDirectory } from "@/components/ai/ai-tools-directory"
+import { getAiTools } from "@/lib/ai-tools"
 
-export default function Home() {
+export default async function Home() {
+  const data = await getAiTools()
+
   return (
     <>
-      <Hero />
-      <PlatformDirectory />
+      <AiHero meta={data.meta} />
+      <AiToolsDirectory initialData={data} />
     </>
   )
 }

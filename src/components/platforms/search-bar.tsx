@@ -8,9 +8,16 @@ interface SearchBarProps {
   onChange: (value: string) => void
   resultCount: number
   className?: string
+  itemLabel?: string
 }
 
-export function SearchBar({ value, onChange, resultCount, className }: SearchBarProps) {
+export function SearchBar({
+  value,
+  onChange,
+  resultCount,
+  className,
+  itemLabel = "platform",
+}: SearchBarProps) {
   const handleClear = () => onChange("")
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -47,7 +54,7 @@ export function SearchBar({ value, onChange, resultCount, className }: SearchBar
         </button>
       )}
       <p className="mt-2 text-xs text-text-muted" aria-live="polite">
-        {resultCount} {resultCount === 1 ? "platform" : "platforms"} found
+        {resultCount} {resultCount === 1 ? itemLabel : `${itemLabel}s`} found
       </p>
     </div>
   )
