@@ -1,16 +1,20 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import { PlatformCard } from "@/components/platforms/platform-card"
 import { SearchBar } from "@/components/platforms/search-bar"
 import { SegmentFilter } from "@/components/platforms/segment-filter"
+import { Pagination } from "@/components/ui/pagination"
 import { platforms } from "@/data/platforms"
 import { segments } from "@/data/segments"
+import { paginate } from "@/lib/pagination"
 import type { SegmentId } from "@/types/platform"
 
 export function PlatformDirectory() {
   const [activeSegment, setActiveSegment] = useState<SegmentId | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   const filteredPlatforms = useMemo(() => {
     const query = searchQuery.trim().toLowerCase()
@@ -34,6 +38,26 @@ export function PlatformDirectory() {
       return searchableText.includes(query)
     })
   }, [activeSegment, searchQuery])
+
+  const pagination = useMemo(
+    () => paginate(filteredPlatforms, currentPage),
+    [filteredPlatforms, currentPage]
+  )
+
+  const handleSegmentChange = (segment: SegmentId | "all") => {
+    setActiveSegment(segment)
+    setCurrentPage(1)
+  }
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query)
+    setCurrentPage(1)
+  }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
 
   const activeSegmentData =
     activeSegment === "all"
@@ -64,7 +88,7 @@ export function PlatformDirectory() {
         </div>
         <SearchBar
           value={searchQuery}
-          onChange={setSearchQuery}
+          onChange={handleSearchChange}
           resultCount={filteredPlatforms.length}
           className="w-full lg:max-w-sm"
         />
@@ -72,15 +96,29 @@ export function PlatformDirectory() {
 
       <SegmentFilter
         activeSegment={activeSegment}
-        onSegmentChange={setActiveSegment}
+        onSegmentChange={handleSegmentChange}
       />
 
       {filteredPlatforms.length > 0 ? (
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredPlatforms.map((platform, index) => (
-            <PlatformCard key={platform.id} platform={platform} index={index} />
-          ))}
-        </div>
+        <>
+          <div
+            ref={gridRef}
+            className="mt-8 scroll-mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {pagination.items.map((platform, index) => (
+              <PlatformCard key={platform.id} platform={platform} index={index} />
+            ))}
+          </div>
+          <Pagination
+            className="mt-10"
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            totalItems={pagination.totalItems}
+            startIndex={pagination.startIndex}
+            endIndex={pagination.endIndex}
+            onPageChange={handlePageChange}
+          />
+        </>
       ) : (
         <div className="mt-16 flex flex-col items-center justify-center text-center">
           <p className="text-lg font-medium text-text-primary">No platforms found</p>

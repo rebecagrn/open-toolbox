@@ -1,10 +1,12 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import { AiSourceFilter } from "@/components/ai/ai-source-filter"
 import { AiToolCard } from "@/components/ai/ai-tool-card"
 import { SearchBar } from "@/components/platforms/search-bar"
+import { Pagination } from "@/components/ui/pagination"
 import { filterAiTools } from "@/lib/ai-tools"
+import { paginate } from "@/lib/pagination"
 import { AI_TOOL_CATEGORIES } from "@/types/ai-tool"
 import type { AiTool, AiToolCategory, AiToolSource, AiToolsResponse } from "@/types/ai-tool"
 import { cn } from "@/lib/utils"
@@ -18,6 +20,8 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
   const [activeSource, setActiveSource] = useState<AiToolSource | "all">("all")
   const [activeCategory, setActiveCategory] = useState<AiToolCategory | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   const filteredTools = useMemo(
     () =>
@@ -30,6 +34,31 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
   )
 
   const sortedTools = useMemo(() => sortTools(filteredTools), [filteredTools])
+
+  const pagination = useMemo(
+    () => paginate(sortedTools, currentPage),
+    [sortedTools, currentPage]
+  )
+
+  const handleSourceChange = (source: AiToolSource | "all") => {
+    setActiveSource(source)
+    setCurrentPage(1)
+  }
+
+  const handleCategoryChange = (category: AiToolCategory | "all") => {
+    setActiveCategory(category)
+    setCurrentPage(1)
+  }
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query)
+    setCurrentPage(1)
+  }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -45,7 +74,7 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
         </div>
         <SearchBar
           value={searchQuery}
-          onChange={setSearchQuery}
+          onChange={handleSearchChange}
           resultCount={sortedTools.length}
           itemLabel="tool"
           className="w-full lg:max-w-sm"
@@ -55,31 +84,45 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
       <AiSourceFilter
         tools={initialData.tools}
         activeSource={activeSource}
-        onSourceChange={setActiveSource}
+        onSourceChange={handleSourceChange}
       />
 
       <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
         <CategoryChip
           label="All categories"
           isActive={activeCategory === "all"}
-          onClick={() => setActiveCategory("all")}
+          onClick={() => handleCategoryChange("all")}
         />
         {AI_TOOL_CATEGORIES.map((category) => (
           <CategoryChip
             key={category}
             label={category}
             isActive={activeCategory === category}
-            onClick={() => setActiveCategory(category)}
+            onClick={() => handleCategoryChange(category)}
           />
         ))}
       </div>
 
       {sortedTools.length > 0 ? (
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedTools.map((tool, index) => (
-            <AiToolCard key={tool.id} tool={tool} index={index} />
-          ))}
-        </div>
+        <>
+          <div
+            ref={gridRef}
+            className="mt-8 scroll-mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {pagination.items.map((tool, index) => (
+              <AiToolCard key={tool.id} tool={tool} index={index} />
+            ))}
+          </div>
+          <Pagination
+            className="mt-10"
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            totalItems={pagination.totalItems}
+            startIndex={pagination.startIndex}
+            endIndex={pagination.endIndex}
+            onPageChange={handlePageChange}
+          />
+        </>
       ) : (
         <div className="mt-16 flex flex-col items-center justify-center text-center">
           <p className="text-lg font-medium text-text-primary">No tools found</p>
