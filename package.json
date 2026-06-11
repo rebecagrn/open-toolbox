@@ -4,9 +4,9 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/open-toolbox/open-toolbox.git"
+    "url": "https://github.com/rebecagrn/open-toolbox.git"
   },
-  "homepage": "https://github.com/open-toolbox/open-toolbox#readme",
+  "homepage": "https://github.com/rebecagrn/open-toolbox#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
