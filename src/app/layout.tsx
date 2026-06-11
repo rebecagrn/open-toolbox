@@ -15,22 +15,22 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Open Projects — Open Source AI Tools Directory",
+  title: "Open Projects — Platforms & Tools Directory",
   description:
-    "Discover open source AI tools, frameworks, and models. Curated catalog plus live data from Hugging Face and GitHub APIs.",
+    "Discover platforms and tools across every creative segment. Filter by design, programming, AI, video, and more — open source, free, freemium, or paid.",
   keywords: [
+    "tools",
+    "platforms",
+    "design",
+    "programming",
     "open source",
-    "ai tools",
-    "llm",
-    "hugging face",
-    "langchain",
-    "ollama",
+    "freemium",
     "directory",
   ],
   openGraph: {
-    title: "Open Projects — Open Source AI Tools Directory",
+    title: "Open Projects — Platforms & Tools Directory",
     description:
-      "Curated open source AI tooling with live listings from Hugging Face and GitHub.",
+      "Browse and filter platforms by segment and pricing across all creative categories.",
     type: "website",
   },
 }

@@ -1,63 +1,62 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { LayoutGrid } from "lucide-react"
-import { SegmentIcon } from "@/components/platforms/segment-icon"
-import { segments } from "@/data/segments"
+import { CircleDollarSign } from "lucide-react"
 import { platforms } from "@/data/platforms"
-import { countPlatformsBySegment } from "@/lib/platforms"
+import { countPlatformsByPricing } from "@/lib/platforms"
 import { cn } from "@/lib/utils"
 import type { PricingModel, SegmentId } from "@/types/platform"
 
-interface SegmentFilterProps {
-  activeSegment: SegmentId | "all"
+const pricingOptions: Array<{ id: PricingModel | "all"; label: string }> = [
+  { id: "all", label: "All pricing" },
+  { id: "open-source", label: "Open source" },
+  { id: "free", label: "Free" },
+  { id: "freemium", label: "Freemium" },
+  { id: "paid", label: "Paid" },
+]
+
+interface PricingFilterProps {
   activePricing: PricingModel | "all"
-  onSegmentChange: (segment: SegmentId | "all") => void
+  activeSegment: SegmentId | "all"
+  onPricingChange: (pricing: PricingModel | "all") => void
 }
 
-export function SegmentFilter({
-  activeSegment,
+export function PricingFilter({
   activePricing,
-  onSegmentChange,
-}: SegmentFilterProps) {
-  const counts = countPlatformsBySegment(platforms, activePricing)
-
-  const getCount = (segmentId: SegmentId | "all") => counts[segmentId] ?? 0
+  activeSegment,
+  onPricingChange,
+}: PricingFilterProps) {
+  const counts = countPlatformsByPricing(platforms, activeSegment)
 
   const handleKeyDown = (
     event: React.KeyboardEvent<HTMLButtonElement>,
-    segment: SegmentId | "all"
+    pricing: PricingModel | "all"
   ) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault()
-      onSegmentChange(segment)
+      onPricingChange(pricing)
     }
   }
-
-  const filterItems: Array<{ id: SegmentId | "all"; label: string; color?: string }> = [
-    { id: "all", label: "All" },
-    ...segments.map((s) => ({ id: s.id, label: s.label, color: s.color })),
-  ]
 
   return (
     <div
       className="flex gap-2 overflow-x-auto pb-1 scrollbar-none"
       role="tablist"
-      aria-label="Filter by segment"
+      aria-label="Filter by pricing"
     >
-      {filterItems.map((item) => {
-        const isActive = activeSegment === item.id
-        const count = getCount(item.id)
+      {pricingOptions.map((option) => {
+        const isActive = activePricing === option.id
+        const count = counts[option.id]
 
         return (
           <button
-            key={item.id}
+            key={option.id}
             type="button"
             role="tab"
             aria-selected={isActive}
             tabIndex={0}
-            onClick={() => onSegmentChange(item.id)}
-            onKeyDown={(e) => handleKeyDown(e, item.id)}
+            onClick={() => onPricingChange(option.id)}
+            onKeyDown={(e) => handleKeyDown(e, option.id)}
             className={cn(
               "relative flex shrink-0 cursor-pointer items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors",
               isActive
@@ -67,18 +66,14 @@ export function SegmentFilter({
           >
             {isActive && (
               <motion.span
-                layoutId="activeSegment"
+                layoutId="activePricing"
                 className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand-primary to-brand-secondary"
                 transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
               />
             )}
             <span className="relative flex items-center gap-2">
-              {item.id === "all" ? (
-                <LayoutGrid className="h-4 w-4" aria-hidden="true" />
-              ) : (
-                <SegmentIcon segmentId={item.id} className="h-4 w-4" />
-              )}
-              {item.label}
+              {option.id === "all" && <CircleDollarSign className="h-4 w-4" aria-hidden="true" />}
+              {option.label}
               <span
                 className={cn(
                   "rounded-md px-1.5 py-0.5 text-[10px] font-semibold",

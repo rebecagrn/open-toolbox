@@ -20,7 +20,7 @@ export function Hero() {
         >
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-bg-elevated/80 px-4 py-1.5 text-xs font-medium text-text-secondary backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand-primary" aria-hidden="true" />
-            Open source directory · {platforms.length}+ tools · {segments.length} segments
+            {platforms.length}+ platforms · {segments.length} segments · all pricing models
           </span>
 
           <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
@@ -30,8 +30,8 @@ export function Hero() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
-            A curated, community-driven list of design, programming, audio, video,
-            AI, and productivity tools — filter by segment and find what you need fast.
+            A curated, community-driven directory of design, programming, audio, video,
+            AI, and productivity tools — filter by segment, pricing, and search.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-text-muted">

@@ -35,7 +35,8 @@ export function SearchBar({
           aria-hidden="true"
         />
         <input
-          type="search"
+          type="text"
+          role="searchbox"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="Search platforms, tools, tags..."
