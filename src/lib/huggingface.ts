@@ -77,6 +77,7 @@ const mapModelToAiTool = (model: HfModel): AiTool => {
     license,
     likes: model.likes,
     downloads: model.downloads,
+    pricing: "open-source",
   }
 }
 
@@ -89,6 +90,7 @@ const mapSpaceToAiTool = (space: HfSpace): AiTool => ({
   category: "space",
   tags: space.tags?.slice(0, 6) ?? [],
   likes: space.likes,
+  pricing: "open-source",
 })
 
 export const fetchHuggingFaceModels = async (limit = 50): Promise<AiTool[]> => {

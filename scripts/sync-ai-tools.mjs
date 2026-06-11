@@ -33,6 +33,10 @@ const main = async () => {
   console.log(`  HF Models: ${data.meta.huggingfaceModels}`)
   console.log(`  HF Spaces: ${data.meta.huggingfaceSpaces}`)
   console.log(`  GitHub: ${data.meta.githubRepos}`)
+  console.log(`  Product Hunt: ${data.meta.productHunt}`)
+  if (data.meta.providers) {
+    console.log("  Provider status:", data.meta.providers)
+  }
 }
 
 main().catch((error) => {

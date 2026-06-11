@@ -1,4 +1,12 @@
-export const AI_TOOL_SOURCES = ["curated", "huggingface-model", "huggingface-space", "github"] as const
+import type { PricingModel } from "@/types/platform"
+
+export const AI_TOOL_SOURCES = [
+  "curated",
+  "huggingface-model",
+  "huggingface-space",
+  "github",
+  "product-hunt",
+] as const
 
 export type AiToolSource = (typeof AI_TOOL_SOURCES)[number]
 
@@ -25,12 +33,15 @@ export interface AiTool {
   source: AiToolSource
   category: AiToolCategory
   tags: string[]
+  pricing?: PricingModel
   license?: string
   stars?: number
   downloads?: number
   likes?: number
   featured?: boolean
 }
+
+export type ProviderStatus = "ok" | "skipped" | "error"
 
 export interface AiToolsResponse {
   tools: AiTool[]
@@ -39,6 +50,14 @@ export interface AiToolsResponse {
     huggingfaceModels: number
     huggingfaceSpaces: number
     githubRepos: number
+    productHunt: number
     fetchedAt: string
+    providers: {
+      curated: ProviderStatus
+      huggingfaceModels: ProviderStatus
+      huggingfaceSpaces: ProviderStatus
+      github: ProviderStatus
+      productHunt: ProviderStatus
+    }
   }
 }

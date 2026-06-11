@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowUpRight, Download, GitBranch, Star } from "lucide-react"
+import { PricingBadge } from "@/components/platforms/pricing-badge"
 import { cn, formatNumber } from "@/lib/utils"
 import type { AiTool, AiToolSource } from "@/types/ai-tool"
 
@@ -10,6 +11,7 @@ const sourceLabels: Record<AiToolSource, string> = {
   "huggingface-model": "HF Model",
   "huggingface-space": "HF Space",
   github: "GitHub",
+  "product-hunt": "Product Hunt",
 }
 
 const sourceStyles: Record<AiToolSource, string> = {
@@ -17,6 +19,7 @@ const sourceStyles: Record<AiToolSource, string> = {
   "huggingface-model": "bg-yellow-500/10 text-yellow-700 ring-yellow-500/20",
   "huggingface-space": "bg-orange-500/10 text-orange-700 ring-orange-500/20",
   github: "bg-slate-500/10 text-slate-700 ring-slate-500/20",
+  "product-hunt": "bg-rose-500/10 text-rose-700 ring-rose-500/20",
 }
 
 interface AiToolCardProps {
@@ -64,6 +67,7 @@ export function AiToolCard({ tool, index }: AiToolCardProps) {
               <span className="inline-flex items-center rounded-md bg-bg-secondary px-2 py-0.5 text-[11px] font-medium text-text-muted">
                 {tool.category}
               </span>
+              {tool.pricing && <PricingBadge pricing={tool.pricing} />}
             </div>
           </div>
           <ArrowUpRight

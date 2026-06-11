@@ -11,6 +11,7 @@ const sourceOptions: Array<{ id: AiToolSource | "all"; label: string }> = [
   { id: "huggingface-model", label: "HF Models" },
   { id: "huggingface-space", label: "HF Spaces" },
   { id: "github", label: "GitHub repos" },
+  { id: "product-hunt", label: "Product Hunt" },
 ]
 
 interface AiSourceFilterProps {

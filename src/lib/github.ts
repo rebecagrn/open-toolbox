@@ -39,6 +39,7 @@ const mapRepoToAiTool = (repo: GitHubRepo): AiTool => ({
   ],
   license: repo.license?.spdx_id ?? undefined,
   stars: repo.stargazers_count,
+  pricing: "open-source",
 })
 
 export const fetchGitHubAiRepos = async (perQuery = 10): Promise<AiTool[]> => {

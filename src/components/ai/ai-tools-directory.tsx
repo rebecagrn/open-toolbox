@@ -9,6 +9,7 @@ import { filterAiTools } from "@/lib/ai-tools"
 import { paginate } from "@/lib/pagination"
 import { AI_TOOL_CATEGORIES } from "@/types/ai-tool"
 import type { AiTool, AiToolCategory, AiToolSource, AiToolsResponse } from "@/types/ai-tool"
+import type { PricingModel } from "@/types/platform"
 import { cn } from "@/lib/utils"
 
 interface AiToolsDirectoryProps {
@@ -19,6 +20,7 @@ interface AiToolsDirectoryProps {
 export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirectoryProps) {
   const [activeSource, setActiveSource] = useState<AiToolSource | "all">("all")
   const [activeCategory, setActiveCategory] = useState<AiToolCategory | "all">("all")
+  const [activePricing, setActivePricing] = useState<PricingModel | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const gridRef = useRef<HTMLDivElement>(null)
@@ -28,9 +30,10 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
       filterAiTools(initialData.tools, {
         source: activeSource,
         category: activeCategory,
+        pricing: activePricing,
         query: searchQuery,
       }),
-    [initialData.tools, activeSource, activeCategory, searchQuery]
+    [initialData.tools, activeSource, activeCategory, activePricing, searchQuery]
   )
 
   const sortedTools = useMemo(() => sortTools(filteredTools), [filteredTools])
@@ -50,6 +53,11 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
     setCurrentPage(1)
   }
 
+  const handlePricingChange = (pricing: PricingModel | "all") => {
+    setActivePricing(pricing)
+    setCurrentPage(1)
+  }
+
   const handleSearchChange = (query: string) => {
     setSearchQuery(query)
     setCurrentPage(1)
@@ -66,7 +74,7 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
         <div className="max-w-xl">
           <p className="mb-1 text-sm font-medium text-brand-primary">Filter & search</p>
           <h2 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
-            Browse open source AI tooling
+            Browse AI tools by source and pricing
           </h2>
           <p className="mt-2 text-sm text-text-muted">
             Last synced {syncedAtLabel}
@@ -87,7 +95,15 @@ export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirector
         onSourceChange={handleSourceChange}
       />
 
-      <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+      <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by pricing">
+        <PricingChip label="All pricing" isActive={activePricing === "all"} onClick={() => handlePricingChange("all")} />
+        <PricingChip label="Open source" isActive={activePricing === "open-source"} onClick={() => handlePricingChange("open-source")} />
+        <PricingChip label="Free" isActive={activePricing === "free"} onClick={() => handlePricingChange("free")} />
+        <PricingChip label="Freemium" isActive={activePricing === "freemium"} onClick={() => handlePricingChange("freemium")} />
+        <PricingChip label="Paid" isActive={activePricing === "paid"} onClick={() => handlePricingChange("paid")} />
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
         <CategoryChip
           label="All categories"
           isActive={activeCategory === "all"}
@@ -148,6 +164,39 @@ interface CategoryChipProps {
   label: string
   isActive: boolean
   onClick: () => void
+}
+
+interface PricingChipProps {
+  label: string
+  isActive: boolean
+  onClick: () => void
+}
+
+function PricingChip({ label, isActive, onClick }: PricingChipProps) {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault()
+      onClick()
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      className={cn(
+        "cursor-pointer rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
+        isActive
+          ? "bg-brand-primary text-white"
+          : "bg-bg-secondary text-text-muted hover:text-text-primary"
+      )}
+      aria-pressed={isActive}
+    >
+      {label}
+    </button>
+  )
 }
 
 function CategoryChip({ label, isActive, onClick }: CategoryChipProps) {

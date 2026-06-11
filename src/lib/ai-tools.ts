@@ -1,43 +1,15 @@
-import { curatedAiTools } from "@/data/open-source-ai-tools"
-import { fetchGitHubAiRepos } from "@/lib/github"
-import { fetchHuggingFaceModels, fetchHuggingFaceSpaces } from "@/lib/huggingface"
+import { aggregateAiTools } from "@/lib/ai-providers/registry"
 import type { AiTool, AiToolsResponse } from "@/types/ai-tool"
+import type { PricingModel } from "@/types/platform"
 
-export const getAiTools = async (): Promise<AiToolsResponse> => {
-  const [models, spaces, githubRepos] = await Promise.allSettled([
-    fetchHuggingFaceModels(50),
-    fetchHuggingFaceSpaces(30),
-    fetchGitHubAiRepos(8),
-  ])
-
-  const huggingfaceModels = models.status === "fulfilled" ? models.value : []
-  const huggingfaceSpaces = spaces.status === "fulfilled" ? spaces.value : []
-  const github = githubRepos.status === "fulfilled" ? githubRepos.value : []
-
-  const tools: AiTool[] = [
-    ...curatedAiTools,
-    ...huggingfaceModels,
-    ...huggingfaceSpaces,
-    ...github,
-  ]
-
-  return {
-    tools,
-    meta: {
-      curated: curatedAiTools.length,
-      huggingfaceModels: huggingfaceModels.length,
-      huggingfaceSpaces: huggingfaceSpaces.length,
-      githubRepos: github.length,
-      fetchedAt: new Date().toISOString(),
-    },
-  }
-}
+export const getAiTools = async (): Promise<AiToolsResponse> => aggregateAiTools()
 
 export const filterAiTools = (
   tools: AiTool[],
   options: {
     source?: string
     category?: string
+    pricing?: PricingModel | "all"
     query?: string
   }
 ): AiTool[] => {
@@ -50,9 +22,18 @@ export const filterAiTools = (
     if (options.category && options.category !== "all" && tool.category !== options.category) {
       return false
     }
+    if (options.pricing && options.pricing !== "all" && tool.pricing !== options.pricing) {
+      return false
+    }
     if (!query) return true
 
-    const searchable = [tool.name, tool.description, ...tool.tags, tool.license ?? ""]
+    const searchable = [
+      tool.name,
+      tool.description,
+      tool.pricing ?? "",
+      ...tool.tags,
+      tool.license ?? "",
+    ]
       .join(" ")
       .toLowerCase()
 

@@ -10,7 +10,11 @@ interface AiHeroProps {
 
 export function AiHero({ meta }: AiHeroProps) {
   const total =
-    meta.curated + meta.huggingfaceModels + meta.huggingfaceSpaces + meta.githubRepos
+    meta.curated +
+    meta.huggingfaceModels +
+    meta.huggingfaceSpaces +
+    meta.githubRepos +
+    meta.productHunt
 
   return (
     <section className="hero-mesh relative overflow-hidden border-b border-border">
@@ -24,7 +28,7 @@ export function AiHero({ meta }: AiHeroProps) {
         >
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-bg-elevated/80 px-4 py-1.5 text-xs font-medium text-text-secondary backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand-primary" aria-hidden="true" />
-            Open source AI · Live from Hugging Face & GitHub APIs
+            AI directory · Hugging Face · GitHub · Product Hunt
           </span>
 
           <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
@@ -33,8 +37,8 @@ export function AiHero({ meta }: AiHeroProps) {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
-            Curated frameworks, inference engines, and agents — plus live listings
-            from Hugging Face models, Spaces, and trending GitHub repos.
+            Curated OSS tools plus live data from Hugging Face, GitHub, and Product Hunt —
+            filter by source, pricing, category, and search.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-text-muted">
