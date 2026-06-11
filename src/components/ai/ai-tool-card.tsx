@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowUpRight, Download, GitBranch, Star } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn, formatNumber } from "@/lib/utils"
 import type { AiTool, AiToolSource } from "@/types/ai-tool"
 
 const sourceLabels: Record<AiToolSource, string> = {
@@ -80,19 +80,19 @@ export function AiToolCard({ tool, index }: AiToolCardProps) {
           {tool.stars !== undefined && (
             <span className="inline-flex items-center gap-1">
               <Star className="h-3 w-3" aria-hidden="true" />
-              {tool.stars.toLocaleString()}
+              {formatNumber(tool.stars)}
             </span>
           )}
           {tool.downloads !== undefined && (
             <span className="inline-flex items-center gap-1">
               <Download className="h-3 w-3" aria-hidden="true" />
-              {tool.downloads.toLocaleString()}
+              {formatNumber(tool.downloads)}
             </span>
           )}
           {tool.likes !== undefined && tool.stars === undefined && (
             <span className="inline-flex items-center gap-1">
               <Star className="h-3 w-3" aria-hidden="true" />
-              {tool.likes.toLocaleString()}
+              {formatNumber(tool.likes)}
             </span>
           )}
           {tool.license && (

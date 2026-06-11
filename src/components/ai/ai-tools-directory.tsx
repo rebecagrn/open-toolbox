@@ -11,9 +11,10 @@ import { cn } from "@/lib/utils"
 
 interface AiToolsDirectoryProps {
   initialData: AiToolsResponse
+  syncedAtLabel: string
 }
 
-export function AiToolsDirectory({ initialData }: AiToolsDirectoryProps) {
+export function AiToolsDirectory({ initialData, syncedAtLabel }: AiToolsDirectoryProps) {
   const [activeSource, setActiveSource] = useState<AiToolSource | "all">("all")
   const [activeCategory, setActiveCategory] = useState<AiToolCategory | "all">("all")
   const [searchQuery, setSearchQuery] = useState("")
@@ -39,7 +40,7 @@ export function AiToolsDirectory({ initialData }: AiToolsDirectoryProps) {
             Browse open source AI tooling
           </h2>
           <p className="mt-2 text-sm text-text-muted">
-            Last synced {new Date(initialData.meta.fetchedAt).toLocaleString()}
+            Last synced {syncedAtLabel}
           </p>
         </div>
         <SearchBar
