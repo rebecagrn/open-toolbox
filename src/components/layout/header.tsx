@@ -17,11 +17,17 @@ export function Header() {
             <span className="text-sm font-semibold tracking-tight text-text-primary">
               Open Projects
             </span>
-            <span className="text-[11px] text-text-muted">Tools & platforms directory</span>
+            <span className="text-[11px] text-text-muted">Open source AI directory</span>
           </div>
         </Link>
 
         <nav className="flex items-center gap-3" aria-label="Site navigation">
+          <Link
+            href="/browse"
+            className="hidden h-9 items-center rounded-lg px-3 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary sm:inline-flex"
+          >
+            All segments
+          </Link>
           <a
             href="https://github.com"
             target="_blank"
