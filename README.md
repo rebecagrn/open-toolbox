@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Open Projects
+
+An open source directory of platforms, tools, and sites organized by creative segment. Browse, search, and filter across design, programming, sounds, visual, video, AI, and more.
+
+## Stack
+
+- **Next.js 16** (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Framer Motion**
+- **Lucide React**
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Segments
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Segment | Description |
+|---------|-------------|
+| Design | UI/UX, prototyping, visual design |
+| Programming | IDEs, frameworks, dev utilities |
+| Sounds | Audio production and music |
+| Visual | Illustration, 3D, photography |
+| Video | Editing, motion, streaming |
+| Writing | Docs, notes, content |
+| Productivity | Tasks, collaboration |
+| AI | LLMs and generative tools |
+| DevOps | Hosting, CI/CD, infrastructure |
+| Learning | Courses and tutorials |
+| Marketing | SEO, email, social |
+| Analytics | Metrics and insights |
 
-## Learn More
+## Adding Platforms
 
-To learn more about Next.js, take a look at the following resources:
+Edit `src/data/platforms.ts` and add a new entry:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```ts
+{
+  id: "my-tool",
+  name: "My Tool",
+  description: "What it does in one sentence.",
+  url: "https://example.com",
+  segments: ["design"],
+  tags: ["ui", "prototyping"],
+  pricing: "freemium", // free | freemium | paid | open-source
+  featured: false,     // optional
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Contributions are welcome! Add new platforms, fix descriptions, or suggest new segments via pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT

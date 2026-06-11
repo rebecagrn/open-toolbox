@@ -1,0 +1,88 @@
+import type { Segment } from "@/types/platform"
+
+export const segments: Segment[] = [
+  {
+    id: "design",
+    label: "Design",
+    description: "UI/UX, prototyping, and visual design tools",
+    icon: "palette",
+    color: "#f43f5e",
+  },
+  {
+    id: "programming",
+    label: "Programming",
+    description: "IDEs, editors, frameworks, and dev utilities",
+    icon: "code",
+    color: "#3b82f6",
+  },
+  {
+    id: "sounds",
+    label: "Sounds",
+    description: "Audio production, music, and sound libraries",
+    icon: "music",
+    color: "#a855f7",
+  },
+  {
+    id: "visual",
+    label: "Visual",
+    description: "Illustration, 3D, photography, and graphics",
+    icon: "image",
+    color: "#f59e0b",
+  },
+  {
+    id: "video",
+    label: "Video",
+    description: "Editing, motion, streaming, and screen capture",
+    icon: "video",
+    color: "#ef4444",
+  },
+  {
+    id: "writing",
+    label: "Writing",
+    description: "Docs, notes, blogging, and content creation",
+    icon: "pen",
+    color: "#10b981",
+  },
+  {
+    id: "productivity",
+    label: "Productivity",
+    description: "Task management, collaboration, and workflows",
+    icon: "zap",
+    color: "#06b6d4",
+  },
+  {
+    id: "ai",
+    label: "AI",
+    description: "LLMs, generative AI, and machine learning tools",
+    icon: "sparkles",
+    color: "#8b5cf6",
+  },
+  {
+    id: "devops",
+    label: "DevOps",
+    description: "Hosting, CI/CD, monitoring, and infrastructure",
+    icon: "server",
+    color: "#64748b",
+  },
+  {
+    id: "learning",
+    label: "Learning",
+    description: "Courses, tutorials, and skill-building platforms",
+    icon: "graduation-cap",
+    color: "#0ea5e9",
+  },
+  {
+    id: "marketing",
+    label: "Marketing",
+    description: "SEO, email, social media, and growth tools",
+    icon: "megaphone",
+    color: "#ec4899",
+  },
+  {
+    id: "analytics",
+    label: "Analytics",
+    description: "Metrics, dashboards, and user insights",
+    icon: "bar-chart",
+    color: "#14b8a6",
+  },
+]
